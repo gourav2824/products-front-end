@@ -1,7 +1,28 @@
+<h1>Products</h1>
 <div *ngFor="let product of products">
     ID : <input type="number" value="{{product.id}}" [disabled]="true">
     &nbsp; &nbsp;
     Name : <input type="text" value="{{product.name}}" [disabled]="true">
     &nbsp; &nbsp;
-    Price : <input type="text" value="{{product.price}}" [disabled]="true">
+    Price : <input type="number" value="{{product.price}}" [disabled]="true">
+    <br><br>
 </div>
+
+<div *ngIf="isAddingNewProduct === false; then thenBlock; else elseBlock"></div>
+<ng-template #thenBlock>
+    <button (click)="isAddingNewProduct = true">Add Product</button>
+</ng-template>
+<ng-template #elseBlock>
+    ID : <input #newProductId type="number">
+    &nbsp; &nbsp;
+    Name : <input #newProductName type="text">
+    &nbsp; &nbsp;
+    Price : <input #newProductPrice type="number">
+    &nbsp; &nbsp;
+
+    <button (click)="addProduct(newProductId.value, newProductName.value, newProductPrice.value)">
+        Add
+    </button>
+    &nbsp; &nbsp;
+    <button (click)="isAddingNewProduct = false">Cancel</button>
+</ng-template>

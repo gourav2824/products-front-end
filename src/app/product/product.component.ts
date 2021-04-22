@@ -9,13 +9,28 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductComponent implements OnInit {
 
-  products: Product[];
+  public products: Product[];
+  public isAddingNewProduct: boolean = false;
 
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.getProducts();
+  }
+
+  getProducts(): void {
     this.productService.getProducts().subscribe(response => {
       this.products = response;
     });
+  }
+
+  addProduct(id: number, name: string, price: number): void {
+    const newProduct = new Product(id, name, price);
+
+    this.productService.addProduct(newProduct).subscribe(response => {
+      this.getProducts();
+    });
+
+    this.isAddingNewProduct = false;
   }
 }
