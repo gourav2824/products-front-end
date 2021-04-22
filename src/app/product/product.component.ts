@@ -11,6 +11,7 @@ export class ProductComponent implements OnInit {
 
   public products: Product[];
   public isAddingNewProduct: boolean = false;
+  public productIndexUnderEditing: number = -1;
 
   constructor(private productService: ProductService) { }
 
@@ -39,5 +40,15 @@ export class ProductComponent implements OnInit {
     this.productService.deleteProduct(productId).subscribe(response => {
       this.getProducts();
     });
+  }
+
+  updateProduct(id: number, name: string, price: number): void {
+    const updatedProduct = new Product(id, name, price);
+
+    this.productService.updateProduct(updatedProduct).subscribe(response => {
+      this.getProducts();
+    });
+
+    this.productIndexUnderEditing = -1;
   }
 }

@@ -1,10 +1,24 @@
 <h1>Products</h1>
-<div *ngFor="let product of products">
-    ID : <input type="number" value="{{product.id}}" [disabled]="true">
+<div *ngFor="let product of products; index as productIndex">
+
+    ID : <input #productId type="number" value="{{product.id}}"
+                [disabled]="true">
     &nbsp; &nbsp;
-    Name : <input type="text" value="{{product.name}}" [disabled]="true">
+    Name : <input #productName type="text" value="{{product.name}}"
+                    [disabled]="productIndex !== productIndexUnderEditing">
     &nbsp; &nbsp;
-    Price : <input type="number" value="{{product.price}}" [disabled]="true">
+    Price : <input #productPrice type="number" value="{{product.price}}"
+                    [disabled]="productIndex !== productIndexUnderEditing">
+    &nbsp; &nbsp;
+
+    <button *ngIf="productIndex !== productIndexUnderEditing; else saveButton"
+            (click)="productIndexUnderEditing = productIndex">Edit
+    </button>
+    <ng-template #saveButton>
+        <button (click)="updateProduct(productId.value, productName.value, productPrice.value)">Save
+        </button>
+    </ng-template>
+
     &nbsp; &nbsp;
     <button (click)="deleteProduct(product.id)">Delete</button>
     <br><br>
