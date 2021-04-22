@@ -5,6 +5,8 @@
     Name : <input type="text" value="{{product.name}}" [disabled]="true">
     &nbsp; &nbsp;
     Price : <input type="number" value="{{product.price}}" [disabled]="true">
+    &nbsp; &nbsp;
+    <button (click)="deleteProduct(product.id)">Delete</button>
     <br><br>
 </div>
 

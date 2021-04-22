@@ -16,6 +16,10 @@ export class ProductService {
   }
 
   addProduct(newProduct: Product) {
-    return this.http.post<Product[]>(this.originUrl, newProduct);
+    return this.http.post<Product>(this.originUrl, newProduct);
+  }
+
+  deleteProduct(productId: number) {
+    return this.http.delete(this.originUrl + "/" + productId);
   }
 }

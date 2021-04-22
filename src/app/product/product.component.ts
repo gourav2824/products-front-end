@@ -33,4 +33,11 @@ export class ProductComponent implements OnInit {
 
     this.isAddingNewProduct = false;
   }
+
+  deleteProduct(productId: number): void {
+    alert("The product has been deleted");
+    this.productService.deleteProduct(productId).subscribe(response => {
+      this.getProducts();
+    });
+  }
 }
