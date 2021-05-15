@@ -1,5 +1,6 @@
-<h1>Products</h1>
-<div *ngFor="let product of products; index as productIndex">
+<div class="container">
+<h1 id="mainHeading">Products</h1>
+<div id="productsList" *ngFor="let product of products; index as productIndex">
 
     ID : <input #productId type="number" value="{{product.id}}"
                 [disabled]="true">
@@ -11,24 +12,30 @@
                     [disabled]="productIndex !== productIndexUnderEditing">
     &nbsp; &nbsp;
 
-    <button *ngIf="productIndex !== productIndexUnderEditing; else saveButton"
+    <button type="button" class="btn btn-primary"
+            *ngIf="productIndex !== productIndexUnderEditing; else saveButton"
             (click)="productIndexUnderEditing = productIndex">Edit
     </button>
     <ng-template #saveButton>
-        <button (click)="updateProduct(productId.value, productName.value, productPrice.value)">Save
+        <button type="button" class="btn btn-success"
+                (click)="updateProduct(productId.value, productName.value, productPrice.value)">Save
         </button>
     </ng-template>
 
     &nbsp; &nbsp;
-    <button (click)="deleteProduct(product.id)">Delete</button>
-    <br><br>
+    <button type="button" class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
 </div>
+<br>
 
 <div *ngIf="isAddingNewProduct === false; then thenBlock; else elseBlock"></div>
 <ng-template #thenBlock>
-    <button (click)="isAddingNewProduct = true">Add Product</button>
+    &nbsp;
+    <button type="button" class="btn btn-outline-secondary"
+            (click)="isAddingNewProduct = true">Add Product
+    </button>
 </ng-template>
 <ng-template #elseBlock>
+    &nbsp;
     ID : <input #newProductId type="number">
     &nbsp; &nbsp;
     Name : <input #newProductName type="text">
@@ -36,9 +43,13 @@
     Price : <input #newProductPrice type="number">
     &nbsp; &nbsp;
 
-    <button (click)="addProduct(newProductId.value, newProductName.value, newProductPrice.value)">
+    <button type="button" class="btn btn-success"
+        (click)="addProduct(newProductId.value, newProductName.value, newProductPrice.value)">
         Add
     </button>
     &nbsp; &nbsp;
-    <button (click)="isAddingNewProduct = false">Cancel</button>
+    <button type="button" class="btn btn-secondary"
+            (click)="isAddingNewProduct = false">Cancel
+    </button>
 </ng-template>
+</div>
