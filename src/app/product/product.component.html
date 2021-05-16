@@ -18,7 +18,7 @@
     </button>
     <ng-template #saveButton>
         <button type="button" class="btn btn-success"
-                (click)="updateProduct(productId.value, productName.value, productPrice.value)">Save
+                (click)="updateProduct(+productId.value, productName.value, +productPrice.value)">Save
         </button>
     </ng-template>
 
@@ -44,7 +44,7 @@
     &nbsp; &nbsp;
 
     <button type="button" class="btn btn-success"
-        (click)="addProduct(newProductId.value, newProductName.value, newProductPrice.value)">
+        (click)="addProduct(+newProductId.value, newProductName.value, +newProductPrice.value)">
         Add
     </button>
     &nbsp; &nbsp;
