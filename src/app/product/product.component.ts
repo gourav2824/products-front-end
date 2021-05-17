@@ -16,27 +16,16 @@ export class ProductComponent implements OnInit {
   public isAddingNewProduct: boolean = false;
   public productIndexUnderEditing: number = -1;
 
-  constructor(private productService: ProductService, private store: Store<{ products: fromProducts.State }>) { }
+  constructor(private store: Store<{ products: fromProducts.State }>) { }
 
   ngOnInit(): void {
-    // this.getProducts();
     this.store.select('products').subscribe(data => {
       this.products = data.products;
     });
   }
 
-  getProducts(): void {
-    this.productService.getProducts().subscribe(response => {
-      this.products = response;
-    });
-  }
-
   addProduct(id: number, name: String, price: number): void {
     const newProduct = new Product(id, name, price);
-
-    // this.productService.addProduct(newProduct).subscribe(response => {
-    //   this.getProducts();
-    // });
 
     this.store.dispatch(new productActions.AddProduct(newProduct));
 
@@ -46,19 +35,11 @@ export class ProductComponent implements OnInit {
   deleteProduct(productId: number): void {
     alert("The product has been deleted");
 
-    // this.productService.deleteProduct(productId).subscribe(response => {
-    //   this.getProducts();
-    // });
-
     this.store.dispatch(new productActions.DeleteProduct(productId));
   }
 
   updateProduct(id: number, name: String, price: number): void {
     const updatedProduct = new Product(id, name, price);
-
-    // this.productService.updateProduct(updatedProduct).subscribe(response => {
-    //   this.getProducts();
-    // });
 
     this.store.dispatch(new productActions.UpdateProduct(updatedProduct));
 
