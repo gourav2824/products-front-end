@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Product } from '../model/product.model';
-import { ProductService } from '../services/product.service';
 import * as productActions from './store/product.actions';
 import * as fromProducts from './store/product.reducer';
 
@@ -16,7 +15,7 @@ export class ProductComponent implements OnInit {
   public isAddingNewProduct: boolean = false;
   public productIndexUnderEditing: number = -1;
 
-  constructor(private store: Store<{ products: fromProducts.State }>) { }
+  constructor(private store: Store<fromProducts.AppState>) { }
 
   ngOnInit(): void {
     this.store.select('products').subscribe(data => {

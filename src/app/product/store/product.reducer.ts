@@ -5,6 +5,10 @@ export interface State {
     products: Product[];
 }
 
+export interface AppState {
+    products: State;
+}
+
 const initialState: State = {
     products: [
         new Product(1, "Phone", 12000),
