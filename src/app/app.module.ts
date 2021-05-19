@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { productReducer } from './product/store/product.reducer';
 import { FormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductEffects } from './product/store/product.effects';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ products: productReducer })
+    StoreModule.forRoot({ products: productReducer }),
+    EffectsModule.forRoot([ProductEffects])
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

@@ -21,9 +21,15 @@ export class ProductComponent implements OnInit {
     this.store.select('products').subscribe(data => {
       this.products = data.products;
     });
+
+    this.getProducts();
   }
 
-  addProduct(id: number, name: String, price: number): void {
+  getProducts(): void {
+    this.store.dispatch(new productActions.GetProducts());
+  }
+
+  addProduct(id: number, name: string, price: number): void {
     const newProduct = new Product(id, name, price);
 
     this.store.dispatch(new productActions.AddProduct(newProduct));
@@ -37,7 +43,7 @@ export class ProductComponent implements OnInit {
     this.store.dispatch(new productActions.DeleteProduct(productId));
   }
 
-  updateProduct(id: number, name: String, price: number): void {
+  updateProduct(id: number, name: string, price: number): void {
     const updatedProduct = new Product(id, name, price);
 
     this.store.dispatch(new productActions.UpdateProduct(updatedProduct));

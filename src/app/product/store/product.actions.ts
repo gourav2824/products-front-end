@@ -1,10 +1,17 @@
 import { Action } from "@ngrx/store";
 import { Product } from "src/app/model/product.model";
 
+export const LOAD_PRODUCTS = "LOAD_PRODUCTS";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
+
+export class LoadProducts implements Action {
+    readonly type = LOAD_PRODUCTS;
+
+    constructor(public payload: Product[]) { }
+}
 
 export class GetProducts implements Action {
     readonly type = GET_PRODUCTS;
@@ -28,4 +35,4 @@ export class UpdateProduct implements Action {
     constructor(public payload: Product) { }
 }
 
-export type productActionsType = GetProducts | AddProduct | DeleteProduct | UpdateProduct;
+export type productActionsType = LoadProducts | GetProducts | AddProduct | DeleteProduct | UpdateProduct;

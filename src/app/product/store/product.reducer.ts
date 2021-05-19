@@ -10,19 +10,16 @@ export interface AppState {
 }
 
 const initialState: State = {
-    products: [
-        new Product(1, "Phone", 12000),
-        new Product(2, "Earphone", 400),
-        new Product(3, "Laptop", 45000)
-    ]
+    products: []
 };
 
 export function productReducer(state: State = initialState, action: productActions.productActionsType) {
     switch (action.type) {
 
-        case productActions.GET_PRODUCTS:
+        case productActions.LOAD_PRODUCTS:
             return {
-                ...state
+                ...state,
+                products: action.payload
             };
 
         case productActions.ADD_PRODUCT:
@@ -34,14 +31,14 @@ export function productReducer(state: State = initialState, action: productActio
         case productActions.DELETE_PRODUCT:
             return {
                 ...state,
-                products: state.products.filter(product => {
-                    return product.getId() !== action.payload;
+                products: state.products.filter((product: Product) => {
+                    return product.id !== action.payload;
                 })
             };
 
         case productActions.UPDATE_PRODUCT:
             const updatedProducts = state.products.map(product => {
-                if (product.getId() === action.payload.getId()) {
+                if (product.id === action.payload.id) {
                     return action.payload;
                 }
                 return product;
