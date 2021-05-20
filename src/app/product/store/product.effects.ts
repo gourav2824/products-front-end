@@ -34,4 +34,17 @@ export class ProductEffects {
             })
         )
     );
+
+    deleteProduct = createEffect(() =>
+        this.actions$.pipe(
+            ofType(productActions.DELETE_PRODUCT),
+            switchMap((action: productActions.DeleteProduct) => {
+                return this.productService.deleteProduct(action.payload).pipe(
+                    map(() => {
+                        return new productActions.DeleteProductSuccess(action.payload);
+                    })
+                );
+            })
+        )
+    );
 }

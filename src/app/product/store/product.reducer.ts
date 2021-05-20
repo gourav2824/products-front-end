@@ -28,7 +28,7 @@ export function productReducer(state: State = initialState, action: productActio
                 products: [...state.products, action.payload].sort((a, b) => a.id <= b.id ? -1 : 1)
             };
 
-        case productActions.DELETE_PRODUCT:
+        case productActions.DELETE_PRODUCT_SUCCESS:
             return {
                 ...state,
                 products: state.products.filter((product: Product) => {
