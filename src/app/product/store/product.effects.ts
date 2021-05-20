@@ -21,4 +21,17 @@ export class ProductEffects {
             })
         )
     );
+
+    addProduct = createEffect(() =>
+        this.actions$.pipe(
+            ofType(productActions.ADD_PRODUCT),
+            switchMap((action: productActions.AddProduct) => {
+                return this.productService.addProduct(action.payload).pipe(
+                    map(response => {
+                        return new productActions.AddProductSuccess(response);
+                    })
+                );
+            })
+        )
+    );
 }
