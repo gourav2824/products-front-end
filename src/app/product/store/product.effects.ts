@@ -47,4 +47,17 @@ export class ProductEffects {
             })
         )
     );
+
+    updateProduct = createEffect(() =>
+        this.actions$.pipe(
+            ofType(productActions.UPDATE_PRODUCT),
+            switchMap((action: productActions.UpdateProduct) => {
+                return this.productService.updateProduct(action.payload).pipe(
+                    map(response => {
+                        return new productActions.UpdateProductSuccess(response);
+                    })
+                );
+            })
+        )
+    );
 }
