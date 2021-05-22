@@ -13,7 +13,7 @@ export class ProductComponent implements OnInit {
 
   public products: Product[];
   public isAddingNewProduct: boolean = false;
-  public productIndexUnderEditing: number = -1;
+  public productIndexUnderEditing: number = null;
 
   constructor(private store: Store<fromProducts.AppState>) { }
 

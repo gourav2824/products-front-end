@@ -12,30 +12,38 @@
                     [disabled]="productIndex !== productIndexUnderEditing">
     &nbsp; &nbsp;
 
-    <button type="button" class="btn btn-primary"
-            *ngIf="productIndex !== productIndexUnderEditing; else saveButton"
-            (click)="productIndexUnderEditing = productIndex">Edit
-    </button>
-    <ng-template #saveButton>
+    <div *ngIf="productIndex !== productIndexUnderEditing; then EditOrDelete; else SaveOrCancel"></div>
+    <ng-template #EditOrDelete>
+        <button type="button" class="btn btn-primary" [disabled]="productIndexUnderEditing !== null"
+                (click)="productIndexUnderEditing = productIndex">Edit
+        </button>
+        
+        &nbsp; &nbsp;
+        <button type="button" class="btn btn-danger" [disabled]="productIndexUnderEditing !== null"
+                (click)="deleteProduct(product.id)">Delete
+        </button>
+    </ng-template>
+    
+    <ng-template #SaveOrCancel>
         <button type="button" class="btn btn-success"
                 (click)="updateProduct(+productId.value, productName.value, +productPrice.value)">Save
         </button>
+        
+        &nbsp; &nbsp;
+        <button type="button" class="btn btn-secondary" (click)="productIndexUnderEditing = null;
+                productName.value = product.name; productPrice.value = product.price">Cancel
+        </button>
     </ng-template>
-
-    &nbsp; &nbsp;
-    <button type="button" class="btn btn-danger" (click)="deleteProduct(product.id)">Delete</button>
 </div>
 <br>
 
 <div *ngIf="isAddingNewProduct === false; then thenBlock; else elseBlock"></div>
 <ng-template #thenBlock>
-    &nbsp;
     <button type="button" class="btn btn-outline-secondary"
             (click)="isAddingNewProduct = true">Add Product
     </button>
 </ng-template>
 <ng-template #elseBlock>
-    &nbsp;
     ID : <input #newProductId type="number">
     &nbsp; &nbsp;
     Name : <input #newProductName type="text">
