@@ -14,16 +14,18 @@
 
     <div *ngIf="productIndex !== productIndexUnderEditing; then EditOrDelete; else SaveOrCancel"></div>
     <ng-template #EditOrDelete>
-        <button type="button" class="btn btn-primary" [disabled]="productIndexUnderEditing !== null"
+        <button type="button" class="btn btn-primary"
+                [disabled]="productIndexUnderEditing !== null || isAddingNewProduct !== false"
                 (click)="productIndexUnderEditing = productIndex">Edit
         </button>
         
         &nbsp; &nbsp;
-        <button type="button" class="btn btn-danger" [disabled]="productIndexUnderEditing !== null"
+        <button type="button" class="btn btn-danger"
+                [disabled]="productIndexUnderEditing !== null || isAddingNewProduct !== false"
                 (click)="deleteProduct(product.id)">Delete
         </button>
     </ng-template>
-    
+
     <ng-template #SaveOrCancel>
         <button type="button" class="btn btn-success"
                 (click)="updateProduct(+productId.value, productName.value, +productPrice.value)">Save
@@ -40,6 +42,7 @@
 <div *ngIf="isAddingNewProduct === false; then thenBlock; else elseBlock"></div>
 <ng-template #thenBlock>
     <button type="button" class="btn btn-outline-secondary"
+            [disabled] = "productIndexUnderEditing !== null"
             (click)="isAddingNewProduct = true">Add Product
     </button>
 </ng-template>
