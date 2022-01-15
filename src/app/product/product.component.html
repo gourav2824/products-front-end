@@ -2,7 +2,7 @@
 <h1 id="mainHeading">Products</h1>
 <div id="productsList" *ngFor="let product of products; index as productIndex">
 
-    ID: <input #productId type="number" value="{{product.id}}"
+    ID : <input #productId type="number" value="{{product.id}}"
                 [disabled]="true">
     &nbsp; &nbsp;
     Name : <input #productName type="text" value="{{product.name}}"
